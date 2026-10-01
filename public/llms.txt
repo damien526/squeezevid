@@ -69,3 +69,4 @@
 - https://undercap.vercel.app/reduce-video-file-size/ - how bitrate, resolution and duration set size
 - https://undercap.vercel.app/blog/ - the math and the 2026 platform limits, documented
 - https://undercap.vercel.app/privacy/ - what is (and cannot be) collected
+- https://undercap.vercel.app/terms/ - terms of use (free, as-is, files stay the user's)

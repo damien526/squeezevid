@@ -61,6 +61,16 @@ export function SiteFooter() {
                   Privacy
                 </Link>
               </li>
+              <li>
+                <Link href="/terms/" className="transition-colors hover:text-fg">
+                  Terms
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:damienyvert.dev@gmail.com" className="transition-colors hover:text-fg">
+                  Contact
+                </a>
+              </li>
             </ul>
           </div>
         </div>

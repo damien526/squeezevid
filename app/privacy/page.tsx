@@ -48,13 +48,44 @@ export default function PrivacyPage() {
           <h2 className="pt-4 font-display text-xl text-fg">Cookies and accounts</h2>
           <p>
             There are no accounts, no logins, and no cookies set by us. Your settings live in the
-            page while it is open and disappear when you close it.
+            page while it is open and disappear when you close it. The site makes no requests to
+            third-party domains: fonts are self-hosted, there are no ad or tracking scripts, and
+            the analytics described above are served from this site’s own origin.
+          </p>
+
+          <h2 className="pt-4 font-display text-xl text-fg">Hosting</h2>
+          <p>
+            The site is hosted on Vercel. Like any web host, Vercel processes the technical data
+            needed to deliver pages (your IP address and request headers in transient access logs)
+            and computes the aggregate, cookieless statistics mentioned above on our behalf. Vercel
+            operates globally, so these requests may be served from infrastructure outside the EU
+            under its standard data-processing terms. We never see raw IP addresses or individual
+            visitor profiles, only aggregate counts.
+          </p>
+
+          <h2 className="pt-4 font-display text-xl text-fg">Who runs this, and your rights</h2>
+          <p>
+            Undercap is operated by an independent developer, who acts as the data controller for
+            the little data described on this page. You can reach the operator at{' '}
+            <a href="mailto:damienyvert.dev@gmail.com" className="text-lime underline underline-offset-4">
+              damienyvert.dev@gmail.com
+            </a>{' '}
+            for any privacy question, including the access, rectification, erasure, restriction,
+            portability and objection rights granted by the GDPR. In practice there is usually
+            nothing to retrieve or erase: we hold no account data and no content, and the usage
+            events are anonymous aggregates that cannot be tied back to you. You also have the
+            right to complain to your local data-protection authority.
           </p>
 
           <h2 className="pt-4 font-display text-xl text-fg">Questions</h2>
           <p>
             This page is deliberately short because the architecture does the heavy lifting: a tool
-            that cannot see your files has very little privacy left to explain.
+            that cannot see your files has very little privacy left to explain. If anything is
+            unclear, write to the address above. Security reports are welcome too, via{' '}
+            <a href="/.well-known/security.txt" className="text-lime underline underline-offset-4">
+              security.txt
+            </a>
+            .
           </p>
         </section>
       </main>

@@ -38,6 +38,11 @@ modèle de croissance.
 - 9 pages d'atterrissage + 3 articles + FAQ JSON-LD + llms.txt + IndexNow.
 - Analytics : pageviews + 8 événements funnel (invisibles tant que le compte
   Vercel n'est pas Pro — même situation que waveform).
+- Audit security/privacy du 01/10/2026 : CSP stricte (testée e2e en prod),
+  X-Frame-Options DENY, Permissions-Policy ; pages `/terms/` et `/privacy/`
+  complètes (contrôleur + contact damienyvert.dev@gmail.com, hébergeur Vercel,
+  droits RGPD) ; `/.well-known/security.txt` (expire 10/2027 — à renouveler).
+  Zéro requête tierce au runtime (fonts auto-hébergées, analytics same-origin).
 
 ## 4. Ce qui reste à faire
 
