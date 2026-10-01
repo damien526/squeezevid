@@ -3,7 +3,7 @@
 import { formatBytes } from '@/lib/format';
 
 /**
- * The limit line — the site's one structural idea, here in its functional form.
+ * The limit line, the site's one structural idea, here in its functional form.
  * A horizontal rail scaled so the limit sits at ~62% of the width; the file's
  * size fills the rail and either overflows the line (coral) or fits (lime).
  */

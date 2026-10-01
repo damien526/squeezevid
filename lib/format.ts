@@ -1,6 +1,6 @@
 const MB = 1024 * 1024;
 
-/** "47.3 MB", "812 KB" — binary units, like file managers show. */
+/** "47.3 MB", "812 KB": binary units, like file managers show. */
 export function formatBytes(bytes: number): string {
   if (bytes >= MB) {
     const mb = bytes / MB;

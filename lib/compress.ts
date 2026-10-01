@@ -183,7 +183,7 @@ export function compress(
           elapsedMs: performance.now() - started,
         };
       }
-      // Overshot — rare, but bitrate control is not exact. Tighten and retry.
+      // Overshot: rare, but bitrate control is not exact. Tighten and retry.
       plan = tightenPlan(plan, buffer.byteLength);
     }
     throw new Error('unreachable');

@@ -41,7 +41,7 @@ const SAFETY = 0.93;
 /** Below this bits-per-pixel-per-frame, H.264 turns to mush; downscale instead. */
 const MIN_BPP = 0.045;
 
-/** Encoder floor — below this, refuse and ask for a bigger target. */
+/** Encoder floor: below this, refuse and ask for a bigger target. */
 const MIN_VIDEO_BITRATE = 80_000;
 
 /** Resolution ladder (short-edge heights). */
@@ -83,18 +83,18 @@ export function makePlan(
       audio = 'copy';
       audioBits = copyBits;
     } else if (!canReencodeAudio) {
-      // This browser has no AAC encoder (e.g. Firefox) — copy if at all viable.
+      // This browser has no AAC encoder (e.g. Firefox): copy if at all viable.
       if (src.audioCodec === 'aac' && copyBits <= budgetBits * 0.5) {
         audio = 'copy';
         audioBits = copyBits;
-        notes.push('Audio kept as-is — this browser cannot re-encode AAC.');
+        notes.push('Audio kept as-is: this browser cannot re-encode AAC.');
       } else {
         throw new TargetTooSmallError(
           'This browser cannot re-encode the audio track, and keeping it would blow the size budget. Enable “Remove audio” in Options, or pick a larger target.',
         );
       }
     } else {
-      // Audio would eat the budget — re-encode it smaller.
+      // Audio would eat the budget; re-encode it smaller.
       const kbps = budgetBits * 0.15 >= 96_000 * duration ? 96 : 64;
       audio = { aacBitrate: kbps * 1000 };
       audioBits = kbps * 1000 * duration;
@@ -119,14 +119,14 @@ export function makePlan(
     const cap = src.videoBitrate * equivalence;
     if (cap < videoBitrate) {
       videoBitrate = Math.max(cap, MIN_VIDEO_BITRATE);
-      notes.push('Bitrate capped near the source’s own quality — spending more bits wouldn’t look better.');
+      notes.push('Bitrate capped near the source’s own quality; spending more bits wouldn’t look better.');
     }
   }
   if (videoBitrate < MIN_VIDEO_BITRATE) {
     throw new TargetTooSmallError(
       `This target leaves under ${Math.round(MIN_VIDEO_BITRATE / 1000)} kbps for ${Math.round(
         duration,
-      )}s of video — the result would be unwatchable. Pick a larger target or trim the video first.`,
+      )}s of video. The result would be unwatchable. Pick a larger target or trim the video first.`,
     );
   }
 
@@ -163,7 +163,7 @@ export function makePlan(
   const height = evenRound(src.height * scale);
   if (outShort < srcShort && !opts.maxHeight) {
     notes.push(
-      `Downscaled to ${Math.max(width, height)}×${Math.min(width, height)} — at this size budget, a smaller sharp image beats a larger blurry one.`,
+      `Downscaled to ${Math.max(width, height)}×${Math.min(width, height)}: at this size budget, a smaller sharp image beats a larger blurry one.`,
     );
   }
 

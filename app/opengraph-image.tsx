@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { SITE_NAME } from '@/lib/site';
 
 export const dynamic = 'force-static';
-export const alt = `${SITE_NAME} — fit any video under any size limit`;
+export const alt = `${SITE_NAME}: fit any video under any size limit`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

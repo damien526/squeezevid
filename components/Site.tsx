@@ -33,7 +33,7 @@ export function SiteFooter() {
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-faint">
               Video compression that runs entirely in your browser. No upload, no account, no
-              watermark — your files never leave your device.
+              watermark. Your files never leave your device.
             </p>
           </div>
           <div>

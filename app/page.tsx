@@ -7,19 +7,19 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 const FAQ = [
   {
     q: 'Is Undercap really free?',
-    a: 'Yes — free, no account, no watermark, no file limits, no “3 free exports”. Compression runs on your own computer, so serving you costs almost nothing, and the tool can stay genuinely free.',
+    a: 'Yes: free, no account, no watermark, no file limits, no “3 free exports”. Compression runs on your own computer, so serving you costs almost nothing, and the tool can stay genuinely free.',
   },
   {
     q: 'Is my video uploaded to a server?',
-    a: 'No. Undercap runs entirely in your browser using WebCodecs. The file is read from your disk, re-encoded by your machine’s own hardware, and saved back to your downloads. It never touches a server — there is nothing to upload it to.',
+    a: 'No. Undercap runs entirely in your browser using WebCodecs. The file is read from your disk, re-encoded by your machine’s own hardware, and saved back to your downloads. It never touches a server; there is nothing to upload it to.',
   },
   {
     q: 'Why is it faster than online compressors?',
-    a: 'Two reasons. Cloud tools spend minutes uploading your file before work starts; Undercap starts instantly. And it uses your computer’s hardware video encoder — the same silicon a native app would use — rather than a shared server queue, so encoding typically runs several times faster than real-time.',
+    a: 'Two reasons. Cloud tools spend minutes uploading your file before work starts; Undercap starts instantly. And it uses your computer’s hardware video encoder, the same silicon a native app would use, rather than a shared server queue, so encoding typically runs several times faster than real-time.',
   },
   {
     q: 'What formats can I compress?',
-    a: 'Input: MP4, MOV, WebM and MKV — including HEVC footage from iPhones, wherever your hardware can decode it. Output: MP4 with H.264 video and AAC audio, the most universally playable combination there is.',
+    a: 'Input: MP4, MOV, WebM and MKV, including HEVC footage from iPhones, wherever your hardware can decode it. Output: MP4 with H.264 video and AAC audio, the most universally playable combination there is.',
   },
   {
     q: 'How does it guarantee the file fits under my limit?',
@@ -27,7 +27,7 @@ const FAQ = [
   },
   {
     q: 'Will the quality be ruined?',
-    a: 'Quality is decided by target size versus duration — physics, not the tool. Undercap spends the available bits as well as they can be spent, stepping down resolution when the budget per pixel gets too thin, and tells you what it decided. Short clips survive tiny targets well; for very long clips it will honestly warn you when a target is unrealistic.',
+    a: 'Quality is decided by target size versus duration: physics, not the tool. Undercap spends the available bits as well as they can be spent, stepping down resolution when the budget per pixel gets too thin, and tells you what it decided. Short clips survive tiny targets well; for very long clips it will honestly warn you when a target is unrealistic.',
   },
   {
     q: 'Which browsers work?',
@@ -54,7 +54,7 @@ export default function HomePage() {
         featureList: [
           'Compress video to an exact target size (8 MB to any custom limit)',
           'Presets for Discord (20 MB), email (18 MB) and common upload caps',
-          '100% local processing — no upload, files never leave the device',
+          '100% local processing: no upload, files never leave the device',
           'Hardware-accelerated encoding via WebCodecs',
           'No watermark, no account, no file limits',
           'Converts MOV, WebM and MKV to universally playable MP4',
@@ -87,7 +87,7 @@ export default function HomePage() {
               under <span className="text-lime">any size limit.</span>
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
-              Pick a target — 20 MB for Discord, 18 MB for email, or any number — and get a file
+              Pick a target (20 MB for Discord, 18 MB for email, or any number) and get a file
               that actually fits. Compressed by <strong className="font-semibold text-fg">your own computer</strong>,
               right in the browser. No upload, no queue, no watermark, no account.
             </p>
@@ -103,11 +103,11 @@ export default function HomePage() {
             {[
               {
                 title: 'No upload, so it’s fast',
-                body: 'Cloud compressors make you upload a huge file to shrink it — minutes of waiting before work even starts. Undercap starts instantly and encodes with your machine’s hardware encoder, typically several times faster than real-time.',
+                body: 'Cloud compressors make you upload a huge file to shrink it: minutes of waiting before work even starts. Undercap starts instantly and encodes with your machine’s hardware encoder, typically several times faster than real-time.',
               },
               {
                 title: 'Private by architecture',
-                body: 'Your video is read from disk, re-encoded, and saved — all inside the browser. There is no server to retain it, scan it, or leak it. Not a policy promise: there is simply nowhere for the file to go.',
+                body: 'Your video is read from disk, re-encoded, and saved, all inside the browser. There is no server to retain it, scan it, or leak it. Not a policy promise: there is simply nowhere for the file to go.',
               },
               {
                 title: 'An exact target, not a quality dial',
@@ -126,9 +126,9 @@ export default function HomePage() {
             <h2 className="font-display text-2xl sm:text-3xl">How it works</h2>
             <ol className="mt-8 grid gap-6 sm:grid-cols-3">
               {[
-                ['Drop a video', 'MP4, MOV, WebM or MKV — any length, any size. The file opens locally; nothing is sent anywhere.'],
+                ['Drop a video', 'MP4, MOV, WebM or MKV. Any length, any size. The file opens locally; nothing is sent anywhere.'],
                 ['Pick the limit', 'A preset like Discord’s 20 MB, or any number of megabytes. The gauge shows how far over the line your file sits.'],
-                ['Download the fit', 'Hardware encoding brings it under the line, the size is verified, and you save a clean MP4 — no watermark.'],
+                ['Download the fit', 'Hardware encoding brings it under the line, the size is verified, and you save a clean MP4 with no watermark.'],
               ].map(([t, b], i) => (
                 <li key={t} className="rounded-2xl border border-line bg-panel p-6">
                   <span className="font-display text-lime">{String(i + 1).padStart(2, '0')}</span>

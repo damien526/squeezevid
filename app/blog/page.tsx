@@ -18,7 +18,7 @@ export default function BlogIndex() {
       <main className="mx-auto w-full max-w-5xl px-5">
         <h1 className="pt-8 font-display text-3xl sm:text-5xl">Notes on making video smaller</h1>
         <p className="mt-4 max-w-2xl text-muted">
-          Short, factual pieces about how compression actually works — written against the real
+          Short, factual pieces about how compression actually works, written against the real
           behavior of the tool, dated where facts can age.
         </p>
         <ul className="mt-12 space-y-6 pb-24">

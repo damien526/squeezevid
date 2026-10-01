@@ -70,7 +70,7 @@ export function Tool({ initialTargetId }: { initialTargetId?: string }) {
       const message =
         err instanceof Error && err.message.includes('No video track')
           ? 'That file has no video track. Drop a video file (MP4, MOV, WebM, MKV…).'
-          : 'Could not read this file. It may use an unsupported format — MP4, MOV, WebM and MKV work best.';
+          : 'Could not read this file. It may use an unsupported format. MP4, MOV, WebM and MKV work best.';
       setPhase({ name: 'error', message });
       event('load_failed', { type: file.type || 'unknown' });
     }
@@ -202,7 +202,7 @@ export function Tool({ initialTargetId }: { initialTargetId?: string }) {
                 or <span className="font-medium text-lime underline underline-offset-4">browse files</span>
               </p>
               <p className="mt-6 text-sm text-faint">
-                MP4 · MOV · WebM · MKV — any length, any size. Nothing is uploaded.
+                MP4 · MOV · WebM · MKV. Any length, any size. Nothing is uploaded.
               </p>
             </>
           )}
@@ -243,7 +243,7 @@ export function Tool({ initialTargetId }: { initialTargetId?: string }) {
           {written.value}
           <span className="ml-2 text-2xl text-muted sm:text-3xl">{written.unit}</span>
         </p>
-        <p className="mt-1 text-sm text-faint">written so far — hardware encoder running locally</p>
+        <p className="mt-1 text-sm text-faint">written so far by the local hardware encoder</p>
         <div className="mt-8">
           <SizeGauge limitBytes={limitBytes} valueBytes={phase.writtenBytes} pulsing />
         </div>

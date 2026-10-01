@@ -8,7 +8,7 @@ export default function NotFound() {
       <main className="mx-auto flex w-full max-w-5xl flex-col items-start px-5 pt-16 pb-32">
         <p className="font-display text-6xl">404</p>
         <p className="mt-4 max-w-md text-muted">
-          This page doesn’t exist — but the compressor does, and it’s one click away.
+          This page doesn’t exist, but the compressor does, and it’s one click away.
         </p>
         <Link
           href="/"

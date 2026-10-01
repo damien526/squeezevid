@@ -1,6 +1,6 @@
 /**
  * Size presets surfaced in the tool and mirrored by the landing pages.
- * Limits verified October 2026 — keep the `note` fields honest and dated.
+ * Limits verified October 2026; keep the `note` fields honest and dated.
  */
 export type Preset = {
   /** URL-safe id, also used as ?target= deep-link value. */
@@ -24,7 +24,7 @@ export const PRESETS: Preset[] = [
     id: 'email',
     label: 'Email · 18 MB',
     mb: 18,
-    note: 'Gmail caps messages at 25 MB — but attachments are base64-encoded (+33%), so ~18 MB is the real ceiling for the file itself.',
+    note: 'Gmail caps messages at 25 MB, but attachments are base64-encoded (+33%), so ~18 MB is the real ceiling for the file itself.',
   },
   {
     id: '8mb',
@@ -42,7 +42,7 @@ export const PRESETS: Preset[] = [
     id: '25mb',
     label: '25 MB',
     mb: 25,
-    note: 'The nominal Gmail/Outlook limit — use the Email preset if the video travels as an attachment.',
+    note: 'The nominal Gmail/Outlook limit. Use the Email preset if the video travels as an attachment.',
   },
   {
     id: '50mb',

@@ -5,7 +5,7 @@ import { SITE_URL } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Privacy',
   description:
-    'Undercap never sees your videos — they are processed entirely in your browser. Here is exactly what is and is not collected.',
+    'Undercap never sees your videos; they are processed entirely in your browser. Here is exactly what is and is not collected.',
   alternates: { canonical: `${SITE_URL}/privacy/` },
 };
 
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
           <h2 className="font-display text-xl text-fg">Your videos</h2>
           <p>
             Undercap never receives your videos. Files are opened, analyzed, re-encoded and saved
-            entirely inside your browser using WebCodecs. There is no upload endpoint on this site —
+            entirely inside your browser using WebCodecs. There is no upload endpoint on this site:
             not a policy choice we could quietly change, but how the product is built. If you watch
             your network tab while compressing, you will see no video data leave your machine.
           </p>
@@ -35,14 +35,14 @@ export default function PrivacyPage() {
             We use Vercel Web Analytics, which is cookieless, to count page views and understand
             which pages are useful. Additionally, the tool reports a small set of anonymous usage
             events so we can find and fix failures: that a file was loaded (its rounded size in MB,
-            duration in seconds, and codec name — never its name or content), that a compression
+            duration in seconds, and codec name, never its name or content), that a compression
             started, succeeded (how long it took, input and output size in MB), failed (an error
             category), or was canceled, and that a download happened.
           </p>
           <p>
             These events contain no identifiers, no filenames, and nothing that could reconstruct
             what a video showed. They exist to answer questions like “do exports fail more often on
-            HEVC input?” — not to profile anyone.
+            HEVC input?”, not to profile anyone.
           </p>
 
           <h2 className="pt-4 font-display text-xl text-fg">Cookies and accounts</h2>
