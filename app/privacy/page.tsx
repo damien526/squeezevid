@@ -5,7 +5,7 @@ import { SITE_URL } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Privacy',
   description:
-    'Undersize never sees your videos — they are processed entirely in your browser. Here is exactly what is and is not collected.',
+    'Undercap never sees your videos — they are processed entirely in your browser. Here is exactly what is and is not collected.',
   alternates: { canonical: `${SITE_URL}/privacy/` },
 };
 
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
         <section className="mt-10 space-y-4 leading-relaxed text-muted">
           <h2 className="font-display text-xl text-fg">Your videos</h2>
           <p>
-            Undersize never receives your videos. Files are opened, analyzed, re-encoded and saved
+            Undercap never receives your videos. Files are opened, analyzed, re-encoded and saved
             entirely inside your browser using WebCodecs. There is no upload endpoint on this site —
             not a policy choice we could quietly change, but how the product is built. If you watch
             your network tab while compressing, you will see no video data leave your machine.

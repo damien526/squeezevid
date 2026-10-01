@@ -23,7 +23,7 @@ export default function OgImage() {
         }}
       >
         <div style={{ display: 'flex', fontSize: 44, fontWeight: 800, letterSpacing: '-1px' }}>
-          UNDER<span style={{ color: '#d7f94c' }}>SIZE</span>
+          UNDER<span style={{ color: '#d7f94c' }}>CAP</span>
         </div>
         <div
           style={{

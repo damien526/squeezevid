@@ -9,6 +9,11 @@ jour : compresseur vidéo 100 % local visant les requêtes « compress video to
 X MB / for Discord / for email », avec le canal ChatGPT de waveform comme
 modèle de croissance.
 
+> **Nom** : d'abord « Undersize », renommé **Undercap** le jour même —
+> `undersize.vercel.app` était pris par un « Undersize · Local Image Toolkit »
+> (collision de marque dans le même espace). « Underlimit » est pris aussi
+> (compresseur PDF local). Vérifier les collisions AVANT de nommer.
+
 ## 2. Le choix du produit (étude du 1/10/2026)
 
 - Toutes les niches « wrapper facile » (sign PDF, passport photo, teleprompter,
@@ -36,7 +41,7 @@ modèle de croissance.
 
 ## 4. Ce qui reste à faire
 
-- [ ] **Domaine custom** : `undersize.app` ou équivalent à acheter, puis mettre
+- [ ] **Domaine custom** : `undercap.app` ou équivalent à acheter, puis mettre
       à jour `lib/site.ts` + `public/llms.txt`, rebuild, `npm run indexnow`.
 - [ ] Search Console + Bing Webmaster à inscrire (leçon waveform : Bing/ChatGPT
       d'abord, Google observe les domaines récents).

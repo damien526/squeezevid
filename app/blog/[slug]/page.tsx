@@ -69,7 +69,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="mt-16 rounded-2xl border border-line bg-panel p-6">
             <p className="font-display">Try it on a real file</p>
             <p className="mt-2 text-sm text-muted">
-              Undersize compresses any video to an exact size, in your browser, free — no upload, no
+              Undercap compresses any video to an exact size, in your browser, free — no upload, no
               watermark, no account.
             </p>
             <Link

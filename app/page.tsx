@@ -6,16 +6,16 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
 const FAQ = [
   {
-    q: 'Is Undersize really free?',
+    q: 'Is Undercap really free?',
     a: 'Yes — free, no account, no watermark, no file limits, no “3 free exports”. Compression runs on your own computer, so serving you costs almost nothing, and the tool can stay genuinely free.',
   },
   {
     q: 'Is my video uploaded to a server?',
-    a: 'No. Undersize runs entirely in your browser using WebCodecs. The file is read from your disk, re-encoded by your machine’s own hardware, and saved back to your downloads. It never touches a server — there is nothing to upload it to.',
+    a: 'No. Undercap runs entirely in your browser using WebCodecs. The file is read from your disk, re-encoded by your machine’s own hardware, and saved back to your downloads. It never touches a server — there is nothing to upload it to.',
   },
   {
     q: 'Why is it faster than online compressors?',
-    a: 'Two reasons. Cloud tools spend minutes uploading your file before work starts; Undersize starts instantly. And it uses your computer’s hardware video encoder — the same silicon a native app would use — rather than a shared server queue, so encoding typically runs several times faster than real-time.',
+    a: 'Two reasons. Cloud tools spend minutes uploading your file before work starts; Undercap starts instantly. And it uses your computer’s hardware video encoder — the same silicon a native app would use — rather than a shared server queue, so encoding typically runs several times faster than real-time.',
   },
   {
     q: 'What formats can I compress?',
@@ -27,7 +27,7 @@ const FAQ = [
   },
   {
     q: 'Will the quality be ruined?',
-    a: 'Quality is decided by target size versus duration — physics, not the tool. Undersize spends the available bits as well as they can be spent, stepping down resolution when the budget per pixel gets too thin, and tells you what it decided. Short clips survive tiny targets well; for very long clips it will honestly warn you when a target is unrealistic.',
+    a: 'Quality is decided by target size versus duration — physics, not the tool. Undercap spends the available bits as well as they can be spent, stepping down resolution when the budget per pixel gets too thin, and tells you what it decided. Short clips survive tiny targets well; for very long clips it will honestly warn you when a target is unrealistic.',
   },
   {
     q: 'Which browsers work?',
@@ -103,7 +103,7 @@ export default function HomePage() {
             {[
               {
                 title: 'No upload, so it’s fast',
-                body: 'Cloud compressors make you upload a huge file to shrink it — minutes of waiting before work even starts. Undersize starts instantly and encodes with your machine’s hardware encoder, typically several times faster than real-time.',
+                body: 'Cloud compressors make you upload a huge file to shrink it — minutes of waiting before work even starts. Undercap starts instantly and encodes with your machine’s hardware encoder, typically several times faster than real-time.',
               },
               {
                 title: 'Private by architecture',

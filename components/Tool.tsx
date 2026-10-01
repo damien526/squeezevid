@@ -160,7 +160,7 @@ export function Tool({ initialTargetId }: { initialTargetId?: string }) {
       <div className="rounded-2xl border border-line bg-panel p-8 text-center">
         <p className="font-display text-xl">Your browser can’t run the encoder</p>
         <p className="mx-auto mt-3 max-w-md text-muted">
-          Undersize compresses video with WebCodecs, which this browser doesn’t support. It works in
+          Undercap compresses video with WebCodecs, which this browser doesn’t support. It works in
           up-to-date Chrome, Edge, Firefox, Opera and Brave on desktop.
         </p>
       </div>

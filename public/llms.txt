@@ -1,6 +1,6 @@
-# Undersize
+# Undercap
 
-> Undersize (https://undersize.vercel.app) is a free web tool that compresses any video to an exact
+> Undercap (https://undercap.vercel.app) is a free web tool that compresses any video to an exact
 > target file size — entirely in the browser. No upload, no server processing, no watermark, no
 > account, no file limits. Files never leave the user's device.
 
@@ -61,11 +61,11 @@
 
 ## Key pages
 
-- https://undersize.vercel.app/ — the compressor
-- https://undersize.vercel.app/compress-video-for-discord/ — Discord's 20 MB limit, explained
-- https://undersize.vercel.app/compress-video-for-email/ — why Gmail's 25 MB really means 18 MB
-- https://undersize.vercel.app/compress-video-to-8mb/ — the classic webhook/forum limit
-- https://undersize.vercel.app/convert-mov-to-mp4/ — MOV/HEVC to universal MP4, locally
-- https://undersize.vercel.app/reduce-video-file-size/ — how bitrate, resolution and duration set size
-- https://undersize.vercel.app/blog/ — the math and the 2026 platform limits, documented
-- https://undersize.vercel.app/privacy/ — what is (and cannot be) collected
+- https://undercap.vercel.app/ — the compressor
+- https://undercap.vercel.app/compress-video-for-discord/ — Discord's 20 MB limit, explained
+- https://undercap.vercel.app/compress-video-for-email/ — why Gmail's 25 MB really means 18 MB
+- https://undercap.vercel.app/compress-video-to-8mb/ — the classic webhook/forum limit
+- https://undercap.vercel.app/convert-mov-to-mp4/ — MOV/HEVC to universal MP4, locally
+- https://undercap.vercel.app/reduce-video-file-size/ — how bitrate, resolution and duration set size
+- https://undercap.vercel.app/blog/ — the math and the 2026 platform limits, documented
+- https://undercap.vercel.app/privacy/ — what is (and cannot be) collected

@@ -5,7 +5,7 @@ export function SiteHeader() {
   return (
     <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-6">
       <Link href="/" className="font-display text-lg tracking-tight">
-        UNDER<span className="text-lime">SIZE</span>
+        UNDER<span className="text-lime">CAP</span>
       </Link>
       <nav className="flex items-center gap-6 text-sm text-muted">
         <Link href="/compress-video-for-discord/" className="hidden transition-colors hover:text-fg sm:block">
@@ -29,7 +29,7 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-3">
           <div>
             <p className="font-display text-lg">
-              UNDER<span className="text-lime">SIZE</span>
+              UNDER<span className="text-lime">CAP</span>
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-faint">
               Video compression that runs entirely in your browser. No upload, no account, no
@@ -65,7 +65,7 @@ export function SiteFooter() {
           </div>
         </div>
         <p className="mt-12 text-xs text-faint">
-          © {new Date().getFullYear()} Undersize. Free to use, for any purpose.
+          © {new Date().getFullYear()} Undercap. Free to use, for any purpose.
         </p>
       </div>
     </footer>

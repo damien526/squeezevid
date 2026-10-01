@@ -1,4 +1,4 @@
-# Undersize
+# Undercap
 
 Compresse n'importe quelle vidéo **sous une taille cible exacte** (20 MB Discord,
 18 MB email, 8 MB webhook, ou n'importe quel nombre), **entièrement dans le
