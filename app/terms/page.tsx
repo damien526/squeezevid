@@ -51,13 +51,14 @@ export default function TermsPage() {
       <SiteHeader />
       <main className="mx-auto w-full max-w-3xl px-5 pb-24">
         <h1 className="pt-8 font-display text-3xl sm:text-4xl">Terms of Use</h1>
-        <p className="mt-3 font-mono text-xs text-faint">Last updated: October 1, 2026</p>
+        <p className="mt-3 font-mono text-xs text-faint">Last updated: October 3, 2026</p>
 
         <section className="mt-10 space-y-4 leading-relaxed text-muted">
           <h2 className="font-display text-xl text-fg">What SqueezeVid is</h2>
           <p>
             SqueezeVid is a free tool that compresses video files entirely in your browser. It is
-            operated by an independent developer; you can reach the operator at{' '}
+            published and operated by Damien Yvert, an independent developer; you can reach the
+            operator at{' '}
             <a href="mailto:damienyvert.dev@gmail.com" className="text-lime underline underline-offset-4">
               damienyvert.dev@gmail.com
             </a>

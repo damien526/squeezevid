@@ -50,7 +50,7 @@ export default function PrivacyPage() {
       <SiteHeader />
       <main className="mx-auto w-full max-w-3xl px-5 pb-24">
         <h1 className="pt-8 font-display text-3xl sm:text-4xl">Privacy</h1>
-        <p className="mt-3 font-mono text-xs text-faint">Last updated: October 1, 2026</p>
+        <p className="mt-3 font-mono text-xs text-faint">Last updated: October 3, 2026</p>
 
         <section className="mt-10 space-y-4 leading-relaxed text-muted">
           <h2 className="font-display text-xl text-fg">Your videos</h2>
@@ -71,8 +71,10 @@ export default function PrivacyPage() {
             which pages are useful. Additionally, the tool reports a small set of anonymous usage
             events so we can find and fix failures: that a file was loaded (its rounded size in MB,
             duration in seconds, and codec name, never its name or content), that a compression
-            started, succeeded (how long it took, input and output size in MB), failed (an error
-            category), or was canceled, and that a download happened.
+            started, succeeded (how long it took, input and output size in MB), failed (a short
+            technical reason, truncated: either one of this tool&rsquo;s own fixed messages or the
+            one your browser&rsquo;s encoder produced, neither of which contains a filename), or
+            was canceled, and that a download happened.
           </p>
           <p>
             These events contain no identifiers, no filenames, and nothing that could reconstruct
@@ -100,8 +102,9 @@ export default function PrivacyPage() {
 
           <h2 className="pt-4 font-display text-xl text-fg">Who runs this, and your rights</h2>
           <p>
-            SqueezeVid is operated by an independent developer, who acts as the data controller for
-            the little data described on this page. You can reach the operator at{' '}
+            SqueezeVid is published and operated by Damien Yvert, an independent developer, who
+            acts as the data controller for the little data described on this page. You can reach
+            the operator at{' '}
             <a href="mailto:damienyvert.dev@gmail.com" className="text-lime underline underline-offset-4">
               damienyvert.dev@gmail.com
             </a>{' '}
