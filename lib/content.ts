@@ -16,6 +16,17 @@ export type LandingPage = {
   intro: string[];
   sections: { heading: string; body: string[] }[];
   faq: { q: string; a: string }[];
+  /**
+   * Blog articles worth reading after this page, by slug.
+   *
+   * These exist because the three articles had exactly ONE inbound internal
+   * link each — from /blog/ — while every other page on the site had fifteen.
+   * A landing page answers "how do I get under 20 MB"; the article behind it
+   * answers "why is the limit 20 MB". Linking the second from the first is
+   * both the useful thing for a reader and the only thing that gets the
+   * article crawled as something other than a leaf.
+   */
+  relatedArticles?: string[];
 };
 
 export const LANDING_PAGES: LandingPage[] = [
@@ -27,6 +38,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Fit any video under Discord’s 20 MB upload limit, right in your browser. Free, no watermark, no account. The file never leaves your device.',
     h1: 'Compress a video for Discord',
     targetId: 'discord',
+    relatedArticles: ['video-upload-limits-2026', 'how-to-hit-an-exact-video-file-size'],
     intro: [
       'Discord’s free upload limit is 20 MB per file (raised from 10 MB in August 2026). Anything bigger gets rejected before it even starts uploading, and unlike images, Discord never compresses video for you.',
       'SqueezeVid fixes that locally: drop your clip, and it re-encodes to land just under 20 MB using your computer’s own hardware encoder. Nothing is uploaded to any server, there is no queue, no watermark, and no account.',
@@ -70,6 +82,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Gmail’s 25 MB limit really means ~18 MB per attachment, because of base64 encoding. Compress your video to fit, free and entirely in your browser.',
     h1: 'Compress a video to email it',
     targetId: 'email',
+    relatedArticles: ['video-upload-limits-2026', 'how-to-hit-an-exact-video-file-size'],
     intro: [
       'Gmail and most providers advertise a 25 MB limit, then reject your 22 MB video anyway. The catch: attachments are base64-encoded for transport, which inflates them by roughly 33%. The real ceiling for the file itself is about 18 MB on Gmail, and less on many corporate servers.',
       'SqueezeVid targets that real ceiling. The 18 MB Email preset produces a file that survives encoding overhead and actually arrives, instead of bouncing or silently converting into a Drive link.',
@@ -112,6 +125,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Shrink any video under 8 MB, the classic limit of webhooks, bots, forums and older platforms. Free, no upload, no watermark, no account.',
     h1: 'Compress a video to 8 MB',
     targetId: '8mb',
+    relatedArticles: ['how-to-hit-an-exact-video-file-size', 'video-upload-limits-2026'],
     intro: [
       '8 MB was Discord’s original upload limit, and it outlived Discord: countless webhooks, chat bots, forum attachments and embed systems still enforce it today. It’s the lowest common denominator of video sharing.',
       'SqueezeVid treats 8 MB as a hard budget: it measures your clip’s duration, reserves room for audio and container overhead, and spends every remaining bit on the picture, re-encoding locally, in your browser, with nothing uploaded.',
@@ -144,6 +158,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Get any video under 10 MB, a common cap on upload forms, ticket systems and strict mail servers. Free and entirely local to your browser.',
     h1: 'Compress a video to 10 MB',
     targetId: '10mb',
+    relatedArticles: ['video-upload-limits-2026', 'how-to-hit-an-exact-video-file-size'],
     intro: [
       '10 MB is the quiet default of the business internet: upload forms, helpdesk tickets, CMS media libraries and plenty of corporate mail servers stop there. It was also Discord’s free limit from 2024 until August 2026, which is why so many tools still talk about it.',
       'SqueezeVid compresses to a hair under 10 MB in your browser: no upload to a compression server (ironic, when the problem is an upload limit), no watermark, no account.',
@@ -175,6 +190,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Fit any video under 25 MB for upload forms, LMS platforms and messaging apps, compressed locally in your browser, free and watermark-free.',
     h1: 'Compress a video to 25 MB',
     targetId: '25mb',
+    relatedArticles: ['video-upload-limits-2026', 'how-to-hit-an-exact-video-file-size'],
     intro: [
       '25 MB is the advertised ceiling of Gmail messages, a frequent cap on learning platforms, application portals and ticket systems, and Discord’s former Nitro-free limit from the 2023–2024 era.',
       'SqueezeVid hits the target locally: your machine’s hardware encoder does the work, your file never leaves your device, and the result carries no watermark.',
@@ -207,6 +223,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Compress any video under 50 MB (Discord Nitro Basic’s limit and a common portal cap) locally in your browser, free, no watermark, no account.',
     h1: 'Compress a video to 50 MB',
     targetId: '50mb',
+    relatedArticles: ['how-to-hit-an-exact-video-file-size', 'video-upload-limits-2026'],
     intro: [
       '50 MB is Discord’s Nitro Basic limit (as of late 2026) and a common ceiling on job-application portals, LMS uploads and document-management systems.',
       'It’s also a generous budget: SqueezeVid can usually keep full resolution and just rebalance the bitrate, re-encoding locally with your hardware encoder in well under real-time.',
@@ -239,6 +256,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Bring any video under 100 MB for uploads, shared drives and messaging, compressed locally in your browser with no upload and no watermark.',
     h1: 'Compress a video to 100 MB',
     targetId: '100mb',
+    relatedArticles: ['how-to-hit-an-exact-video-file-size', 'why-in-browser-video-compression-is-fast'],
     intro: [
       '100 MB comfortably clears most upload forms, shared-drive policies and messaging apps, while being a fraction of what cameras and screen recorders actually produce.',
       'At this budget SqueezeVid almost never needs to downscale: it keeps your resolution and frame rate and simply re-encodes at an efficient bitrate, locally, with no upload step at all.',
@@ -271,6 +289,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Turn iPhone MOV (HEVC) videos into universally playable MP4 files, converted locally in your browser, free, with an optional size target.',
     h1: 'Convert MOV to MP4',
     targetId: null,
+    relatedArticles: ['why-in-browser-video-compression-is-fast', 'how-to-hit-an-exact-video-file-size'],
     intro: [
       'iPhones record MOV files, often with HEVC video inside, and half the internet refuses to play them: Windows machines without codec packs, older players, many upload forms, most embeds.',
       'SqueezeVid reads the MOV locally in your browser, decodes it with your machine’s hardware, and writes a standard MP4 with H.264 video and AAC audio, the one combination that plays everywhere. Pick a size target while you’re at it, or a generous one just to convert.',
@@ -313,6 +332,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Shrink any video to any size you need, locally in your browser. How bitrate, resolution and duration decide file size, and a tool that does the math for you.',
     h1: 'Reduce a video’s file size',
     targetId: null,
+    relatedArticles: ['how-to-hit-an-exact-video-file-size', 'why-in-browser-video-compression-is-fast'],
     intro: [
       'Every video’s size is just bitrate × duration. Reducing it means lowering the bitrate, and doing that well means knowing how low you can go before the picture falls apart, and when to trade resolution instead.',
       'SqueezeVid does that math for you, backwards: you say what the file must weigh, it works out the best bitrate and resolution that fit, then encodes locally in your browser. No upload, no queue, no watermark, no account.',

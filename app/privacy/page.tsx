@@ -1,17 +1,52 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '@/components/Site';
-import { SITE_URL } from '@/lib/site';
+import { contentPageGraph, jsonLdGraph } from '@/lib/jsonld';
+import { SITE_NAME, canonicalUrl, ogImageUrl, socialTitle } from '@/lib/site';
+
+const DESCRIPTION =
+  'SqueezeVid never sees your videos; they are processed entirely in your browser. Here is exactly what is and is not collected.';
 
 export const metadata: Metadata = {
   title: 'Privacy',
-  description:
-    'SqueezeVid never sees your videos; they are processed entirely in your browser. Here is exactly what is and is not collected.',
-  alternates: { canonical: `${SITE_URL}/privacy/` },
+  description: DESCRIPTION,
+  alternates: { canonical: canonicalUrl('/privacy') },
+  // Declared so the `app/opengraph-image.tsx` file convention cannot override
+  // the layout's `images` with the robots-blocked `/opengraph-image` URL.
+  openGraph: {
+    type: 'website',
+    url: canonicalUrl('/privacy'),
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    title: socialTitle('Privacy'),
+    description: DESCRIPTION,
+    images: [
+      { url: ogImageUrl(), width: 1200, height: 630, alt: SITE_NAME, type: 'image/png' },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: socialTitle('Privacy'),
+    description: DESCRIPTION,
+    images: [ogImageUrl()],
+  },
 };
 
 export default function PrivacyPage() {
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdGraph(
+            contentPageGraph({
+              url: canonicalUrl('/privacy'),
+              name: 'Privacy',
+              description: DESCRIPTION,
+              crumb: 'Privacy',
+            }),
+          ),
+        }}
+      />
       <SiteHeader />
       <main className="mx-auto w-full max-w-3xl px-5 pb-24">
         <h1 className="pt-8 font-display text-3xl sm:text-4xl">Privacy</h1>

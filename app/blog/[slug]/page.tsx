@@ -3,7 +3,15 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { SiteFooter, SiteHeader } from '@/components/Site';
 import { ARTICLES, articleBySlug } from '@/lib/blog';
-import { SITE_NAME, SITE_URL } from '@/lib/site';
+import { articleGraph, jsonLdGraph } from '@/lib/jsonld';
+import {
+  PUBLISHER_NAME,
+  SITE_NAME,
+  SITE_TAGLINE,
+  canonicalUrl,
+  ogImageUrl,
+  socialTitle,
+} from '@/lib/site';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -17,15 +25,51 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = articleBySlug(slug);
   if (!article) return {};
+  const url = canonicalUrl(`/blog/${article.slug}`);
+
   return {
-    title: article.title,
+    /**
+     * `absolute`, with `metaTitle` where the headline is too long for a
+     * `<title>`, and WITHOUT the brand suffix.
+     *
+     * Two constraints, not one. The layout's `%s · SqueezeVid` template pushed
+     * these titles to 82 and 74 characters, past the width Google renders —
+     * and it is always the end that goes, so both lost what located them.
+     * Dropping the brand from the `<title>` buys back thirteen characters that
+     * a reader scanning a result page can actually use; the brand still rides
+     * on the social card below, which has no such width and reaches the reader
+     * with no domain in sight.
+     */
+    title: { absolute: article.metaTitle ?? article.title },
     description: article.description,
-    alternates: { canonical: `${SITE_URL}/blog/${article.slug}/` },
+    alternates: { canonical: url },
+    // Same trap as the landing pages: declaring `openGraph` here replaces the
+    // layout's, so the image has to be named explicitly or the card ships empty.
     openGraph: {
-      title: article.title,
+      title: socialTitle(article.title),
       description: article.description,
       type: 'article',
+      url,
+      siteName: SITE_NAME,
+      locale: 'en_US',
       publishedTime: article.datePublished,
+      modifiedTime: article.dateModified ?? article.datePublished,
+      authors: [PUBLISHER_NAME],
+      images: [
+        {
+          url: ogImageUrl(),
+          width: 1200,
+          height: 630,
+          alt: `${SITE_NAME}: ${SITE_TAGLINE}`,
+          type: 'image/png',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: socialTitle(article.title),
+      description: article.description,
+      images: [ogImageUrl()],
     },
   };
 }
@@ -35,20 +79,16 @@ export default async function ArticlePage({ params }: Props) {
   const article = articleBySlug(slug);
   if (!article) notFound();
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.description,
-    datePublished: article.datePublished,
-    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-    mainEntityOfPage: `${SITE_URL}/blog/${article.slug}/`,
-  };
+  const reading = (article.related ?? [])
+    .map((slug) => articleBySlug(slug))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a) && a!.slug !== article.slug);
 
   return (
     <div className="relative">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdGraph(articleGraph(article)) }}
+      />
       <SiteHeader />
       <main className="mx-auto w-full max-w-3xl px-5">
         <article className="pt-8 pb-16">
@@ -79,6 +119,27 @@ export default async function ArticlePage({ params }: Props) {
               Open the compressor
             </Link>
           </div>
+
+          {reading.length > 0 && (
+            <section className="mt-12">
+              <h2 className="font-display text-xl sm:text-2xl">Keep reading</h2>
+              <ul className="mt-6 space-y-4">
+                {reading.map((a) => (
+                  <li key={a.slug}>
+                    <Link
+                      href={`/blog/${a.slug}/`}
+                      className="group block rounded-2xl border border-line bg-panel p-5 transition-colors hover:border-line-strong"
+                    >
+                      <p className="font-medium transition-colors group-hover:text-lime">
+                        {a.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{a.description}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </article>
       </main>
       <SiteFooter />

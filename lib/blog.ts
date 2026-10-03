@@ -6,21 +6,47 @@
 
 export type Article = {
   slug: string;
+  /** The `<h1>`, and the headline in the markup. Written for a reader. */
   title: string;
+  /**
+   * The `<title>`, when the headline is too long for one.
+   *
+   * Google cuts the title around 60 characters and it is always the end that
+   * goes. With the ` · SqueezeVid` suffix the layout appends, two headlines
+   * blew that budget: "Video upload size limits in 2026: Discord, Gmail, and
+   * everywhere else" rendered at 82 characters and "Why in-browser video
+   * compression beats uploading to the cloud" at 74, so both lost the part
+   * that located them. The headline stays long where the page has room for it;
+   * this is what the `<title>` uses.
+   */
+  metaTitle?: string;
   description: string;
   datePublished: string; // ISO
+  /** Set when an article is revised after publication. */
+  dateModified?: string; // ISO
   minutes: number;
   sections: { h2?: string; paras: string[] }[];
+  /**
+   * Sibling articles to offer at the end of this one.
+   *
+   * These exist because the three articles had exactly ONE inbound internal
+   * link each — from /blog/ — while every other page on the site had fifteen.
+   * They did not link to each other, and no landing page pointed at them. A
+   * page nothing cites is a page that does not rank.
+   */
+  related?: string[];
 };
 
 export const ARTICLES: Article[] = [
   {
     slug: 'why-in-browser-video-compression-is-fast',
     title: 'Why in-browser video compression beats uploading to the cloud',
+    metaTitle: 'Why In-Browser Video Compression Beats the Cloud',
     description:
       'The math of upload time, what WebCodecs actually is, and why a browser tab with access to your hardware encoder outruns a server farm for this job.',
     datePublished: '2026-10-01',
     minutes: 6,
+    related: ['how-to-hit-an-exact-video-file-size', 'video-upload-limits-2026'],
     sections: [
       {
         paras: [
@@ -63,9 +89,10 @@ export const ARTICLES: Article[] = [
     slug: 'how-to-hit-an-exact-video-file-size',
     title: 'How to compress a video to an exact file size',
     description:
-      'File size is bitrate × duration; everything else is detail. The actual math SqueezeVid runs: budgets, safety margins, the resolution ladder, and the verify-and-retry pass.',
+      'File size is bitrate × duration; everything else is detail. The actual math SqueezeVid runs, budgets and safety margins included.',
     datePublished: '2026-10-01',
     minutes: 7,
+    related: ['video-upload-limits-2026', 'why-in-browser-video-compression-is-fast'],
     sections: [
       {
         paras: [
@@ -111,10 +138,12 @@ export const ARTICLES: Article[] = [
   {
     slug: 'video-upload-limits-2026',
     title: 'Video upload size limits in 2026: Discord, Gmail, and everywhere else',
+    metaTitle: 'Video Upload Size Limits in 2026: Discord, Gmail & More',
     description:
       'The current numbers, their history, and the encoding fine print: Discord’s move to 20 MB, what Gmail’s 25 MB really fits, and the 10 MB forms that never die.',
     datePublished: '2026-10-01',
     minutes: 6,
+    related: ['how-to-hit-an-exact-video-file-size', 'why-in-browser-video-compression-is-fast'],
     sections: [
       {
         paras: [

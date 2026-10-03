@@ -2,7 +2,49 @@ import Link from 'next/link';
 import { Tool } from '@/components/Tool';
 import { SiteFooter, SiteHeader } from '@/components/Site';
 import { LANDING_PAGES } from '@/lib/content';
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
+import { homeGraph, jsonLdGraph } from '@/lib/jsonld';
+import type { Metadata } from 'next';
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TAGLINE,
+  canonicalUrl,
+  ogImageUrl,
+} from '@/lib/site';
+
+/**
+ * The home page declares its own `openGraph` block for one reason: without
+ * one, the `app/opengraph-image.tsx` file convention overrides the `images`
+ * inherited from the layout, and this page shipped the extensionless,
+ * robots-blocked `/opengraph-image` URL. `scripts/og-png.mjs` fails the build
+ * if that ever comes back.
+ */
+export const metadata: Metadata = {
+  alternates: { canonical: canonicalUrl('/') },
+  openGraph: {
+    type: 'website',
+    url: canonicalUrl('/'),
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    title: `${SITE_NAME}: ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: ogImageUrl(),
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME}: ${SITE_TAGLINE}`,
+        type: 'image/png',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME}: ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    images: [ogImageUrl()],
+  },
+};
 
 const FAQ = [
   {
@@ -40,40 +82,12 @@ const FAQ = [
 ];
 
 export default function HomePage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebApplication',
-        name: SITE_NAME,
-        url: SITE_URL,
-        applicationCategory: 'MultimediaApplication',
-        operatingSystem: 'Web browser',
-        description: SITE_DESCRIPTION,
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        featureList: [
-          'Compress video to an exact target size (8 MB to any custom limit)',
-          'Presets for Discord (20 MB), email (18 MB) and common upload caps',
-          '100% local processing: no upload, files never leave the device',
-          'Hardware-accelerated encoding via WebCodecs',
-          'No watermark, no account, no file limits',
-          'Converts MOV, WebM and MKV to universally playable MP4',
-        ],
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: FAQ.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
-      },
-    ],
-  };
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdGraph(homeGraph(FAQ)) }}
+      />
       <div className="dotgrid absolute inset-x-0 top-0 h-[480px]" aria-hidden="true" />
       <div className="relative">
         <SiteHeader />

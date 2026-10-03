@@ -1,18 +1,53 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SiteFooter, SiteHeader } from '@/components/Site';
-import { SITE_URL } from '@/lib/site';
+import { contentPageGraph, jsonLdGraph } from '@/lib/jsonld';
+import { SITE_NAME, canonicalUrl, ogImageUrl, socialTitle } from '@/lib/site';
+
+const DESCRIPTION =
+  'The terms for using SqueezeVid: free for any purpose, provided as-is, your files stay yours and stay on your device.';
 
 export const metadata: Metadata = {
   title: 'Terms of Use',
-  description:
-    'The terms for using SqueezeVid: free for any purpose, provided as-is, your files stay yours and stay on your device.',
-  alternates: { canonical: `${SITE_URL}/terms/` },
+  description: DESCRIPTION,
+  alternates: { canonical: canonicalUrl('/terms') },
+  // Declared so the `app/opengraph-image.tsx` file convention cannot override
+  // the layout's `images` with the robots-blocked `/opengraph-image` URL.
+  openGraph: {
+    type: 'website',
+    url: canonicalUrl('/terms'),
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    title: socialTitle('Terms of Use'),
+    description: DESCRIPTION,
+    images: [
+      { url: ogImageUrl(), width: 1200, height: 630, alt: SITE_NAME, type: 'image/png' },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: socialTitle('Terms of Use'),
+    description: DESCRIPTION,
+    images: [ogImageUrl()],
+  },
 };
 
 export default function TermsPage() {
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdGraph(
+            contentPageGraph({
+              url: canonicalUrl('/terms'),
+              name: 'Terms of Use',
+              description: DESCRIPTION,
+              crumb: 'Terms',
+            }),
+          ),
+        }}
+      />
       <SiteHeader />
       <main className="mx-auto w-full max-w-3xl px-5 pb-24">
         <h1 className="pt-8 font-display text-3xl sm:text-4xl">Terms of Use</h1>

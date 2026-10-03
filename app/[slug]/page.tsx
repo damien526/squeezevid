@@ -3,8 +3,16 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Tool } from '@/components/Tool';
 import { SiteFooter, SiteHeader } from '@/components/Site';
+import { articleBySlug } from '@/lib/blog';
 import { LANDING_PAGES, landingBySlug } from '@/lib/content';
-import { SITE_URL } from '@/lib/site';
+import { jsonLdGraph, landingGraph } from '@/lib/jsonld';
+import {
+  SITE_NAME,
+  SITE_TAGLINE,
+  canonicalUrl,
+  ogImageUrl,
+  socialTitle,
+} from '@/lib/site';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -18,11 +26,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = landingBySlug(slug);
   if (!page) return {};
+  const url = canonicalUrl(`/${page.slug}`);
+
   return {
     title: { absolute: page.title },
     description: page.metaDescription,
-    alternates: { canonical: `${SITE_URL}/${page.slug}/` },
-    openGraph: { title: page.title, description: page.metaDescription },
+    alternates: { canonical: url },
+    /**
+     * ⚠ `images` IS NOT OPTIONAL HERE. Declaring an `openGraph` object in
+     * `generateMetadata` REPLACES the layout's, and the file-based
+     * `app/opengraph-image.tsx` is not resolved for this segment either — so
+     * these pages shipped `twitter:card="summary_large_image"` with no image
+     * at all, and every share rendered as a bare link. On a site whose
+     * flagship page is "compress for Discord", that was the worst possible
+     * place for it. Verified in the built HTML before the fix.
+     */
+    openGraph: {
+      type: 'website',
+      url,
+      siteName: SITE_NAME,
+      locale: 'en_US',
+      title: socialTitle(page.title),
+      description: page.metaDescription,
+      images: [
+        {
+          url: ogImageUrl(),
+          width: 1200,
+          height: 630,
+          alt: `${SITE_NAME}: ${SITE_TAGLINE}`,
+          type: 'image/png',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: socialTitle(page.title),
+      description: page.metaDescription,
+      images: [ogImageUrl()],
+    },
   };
 }
 
@@ -31,21 +72,17 @@ export default async function LandingPageRoute({ params }: Props) {
   const page = landingBySlug(slug);
   if (!page) notFound();
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: page.faq.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
-
   const others = LANDING_PAGES.filter((p) => p.slug !== page.slug).slice(0, 6);
+  const reading = (page.relatedArticles ?? [])
+    .map((slug) => articleBySlug(slug))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdGraph(landingGraph(page)) }}
+      />
       <div className="dotgrid absolute inset-x-0 top-0 h-[360px]" aria-hidden="true" />
       <div className="relative">
         <SiteHeader />
@@ -85,6 +122,27 @@ export default async function LandingPageRoute({ params }: Props) {
               ))}
             </dl>
           </section>
+
+          {reading.length > 0 && (
+            <section className="mt-16">
+              <h2 className="font-display text-xl sm:text-2xl">Read next</h2>
+              <ul className="mt-6 space-y-4">
+                {reading.map((a) => (
+                  <li key={a.slug}>
+                    <Link
+                      href={`/blog/${a.slug}/`}
+                      className="group block rounded-2xl border border-line bg-panel p-5 transition-colors hover:border-line-strong"
+                    >
+                      <p className="font-medium transition-colors group-hover:text-lime">
+                        {a.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{a.description}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <section className="mt-16 pb-24">
             <h2 className="text-sm font-semibold text-muted">Other limits</h2>
