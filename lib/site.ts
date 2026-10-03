@@ -1,5 +1,5 @@
 /** Single source of truth for the site's identity. Update SITE_URL when a custom domain lands. */
-export const SITE_URL = 'https://squeezevid.app';
+export const SITE_URL = 'https://www.squeezevid.app';
 export const SITE_NAME = 'SqueezeVid';
 export const SITE_TAGLINE = 'Fit any video under any size limit';
 export const SITE_DESCRIPTION =

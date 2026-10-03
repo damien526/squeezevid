@@ -55,7 +55,7 @@ modèle de croissance.
       `squeezevid`, repo GitHub renommé `damien526/squeezevid` (GitHub redirige
       l'ancienne URL), dossier local `~/development/squeezevid`.
 - [ ] `npm run indexnow` **une fois le domaine réellement servi** (vérifier
-      `https://squeezevid.app/` dans un navigateur d'abord) : sinon on soumet
+      `https://www.squeezevid.app/` dans un navigateur d'abord) : sinon on soumet
       des URLs mortes à Bing.
 - [ ] Search Console + Bing Webmaster à inscrire pour `squeezevid.app` (leçon
       waveform : Bing/ChatGPT d'abord, Google observe les domaines récents).
