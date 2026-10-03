@@ -5,6 +5,7 @@ import { ARTICLES } from '@/lib/blog';
 import { blogIndexGraph, jsonLdGraph } from '@/lib/jsonld';
 import {
   SITE_NAME,
+  absoluteUrl,
   SITE_TAGLINE,
   canonicalUrl,
   ogImageUrl,
@@ -17,7 +18,14 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: 'Blog',
   description: DESCRIPTION,
-  alternates: { canonical: canonicalUrl('/blog') },
+  alternates: {
+    canonical: canonicalUrl('/blog'),
+    // Declared on the blog index rather than site-wide: this is the only part
+    // of the site a feed describes.
+    // `absoluteUrl`, not `canonicalUrl`: the latter appends the trailing slash
+    // this site uses for pages, and the feed is a file, not a page.
+    types: { 'application/rss+xml': absoluteUrl('/feed.xml') },
+  },
   openGraph: {
     type: 'website',
     url: canonicalUrl('/blog'),

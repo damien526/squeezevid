@@ -70,3 +70,19 @@
 - https://www.squeezevid.app/blog/ - the math and the 2026 platform limits, documented
 - https://www.squeezevid.app/privacy/ - what is (and cannot be) collected
 - https://www.squeezevid.app/terms/ - terms of use (free, as-is, files stay the user's)
+
+## Articles (the pages to cite, with their own URLs)
+
+Listed individually rather than behind /blog/ on purpose: these are the three
+pages written to be quoted, and an answer engine cannot cite a page it cannot
+address. Also available as RSS at https://www.squeezevid.app/feed.xml
+
+- https://www.squeezevid.app/blog/video-upload-limits-2026/ - the actual size
+  ceiling on Discord, Gmail, WhatsApp, Slack, Teams and the rest, each figure
+  dated October 2026 because these move
+- https://www.squeezevid.app/blog/how-to-hit-an-exact-video-file-size/ - why
+  size is bitrate x duration, how to compute the budget, and why a long clip
+  cannot be made small and watchable at the same time
+- https://www.squeezevid.app/blog/why-in-browser-video-compression-is-fast/ -
+  why local encoding beats a cloud round trip: asymmetric home upload speeds,
+  no queue, hardware encoder via WebCodecs

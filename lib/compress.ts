@@ -19,13 +19,9 @@ import { makePlan, tightenPlan, type CompressionPlan, type SourceInfo } from './
 export type { CompressionPlan, SourceInfo };
 export { TargetTooSmallError } from './plan';
 
-export function isSupported(): boolean {
-  return (
-    typeof window !== 'undefined' &&
-    'VideoEncoder' in window &&
-    'VideoDecoder' in window
-  );
-}
+// `isSupported` lives in `./supported`, on purpose: it is not re-exported from
+// here. Importing this module to run a feature check pulls Mediabunny with it,
+// and that is exactly the 138 KB regression the move was meant to end.
 
 export async function analyze(file: File): Promise<SourceInfo> {
   const input = new Input({ formats: ALL_FORMATS, source: new BlobSource(file) });

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { formatBytes, formatBytesParts, formatDuration, mbToBytes } from '@/lib/format';
 import { presetById, PRESETS } from '@/lib/presets';
 import type { CompressHandle, CompressResult, SourceInfo } from '@/lib/compress';
+import { isSupported } from '@/lib/supported';
 import { event } from './analytics';
 import { SizeGauge } from './SizeGauge';
 import { TargetPicker, targetMb, type Target } from './TargetPicker';
@@ -38,13 +39,14 @@ export function Tool({ initialTargetId }: { initialTargetId?: string }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Feature-detect WebCodecs; read the ?target= deep link from landing pages.
+  // `isSupported` comes from `lib/supported`, not from `lib/compress`: the
+  // engine — and the 540 KB of Mediabunny behind it — must not be downloaded
+  // to answer a question about `window`.
   useEffect(() => {
-    import('@/lib/compress').then(({ isSupported }) => {
-      if (!isSupported()) {
-        setPhase({ name: 'unsupported' });
-        event('unsupported');
-      }
-    });
+    if (!isSupported()) {
+      setPhase({ name: 'unsupported' });
+      event('unsupported');
+    }
     const raw = new URLSearchParams(window.location.search).get('target');
     if (!raw) return;
     const preset = presetById(raw);
