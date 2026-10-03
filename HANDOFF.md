@@ -1,6 +1,7 @@
 # Où en est le projet
 
-**Dernière mise à jour : 1er octobre 2026 — naissance du projet.**
+**Dernière mise à jour : 3 octobre 2026 — renommage en SqueezeVid + domaine
+custom.**
 
 ## 1. La situation en une phrase
 
@@ -9,10 +10,13 @@ jour : compresseur vidéo 100 % local visant les requêtes « compress video to
 X MB / for Discord / for email », avec le canal ChatGPT de waveform comme
 modèle de croissance.
 
-> **Nom** : d'abord « Undersize », renommé **Undercap** le jour même —
-> `undersize.vercel.app` était pris par un « Undersize · Local Image Toolkit »
-> (collision de marque dans le même espace). « Underlimit » est pris aussi
-> (compresseur PDF local). Vérifier les collisions AVANT de nommer.
+> **Nom** : « Undersize » → « Undercap » (1/10) → **SqueezeVid** (3/10), domaine
+> `squeezevid.app`. `undersize.vercel.app` était pris par un « Undersize · Local
+> Image Toolkit » et « Underlimit » par un compresseur PDF local (collisions de
+> marque dans le même espace) ; « Undercap » était libre mais trop opaque — un
+> visiteur ne devinait pas le produit. Leçon : vérifier les collisions ET
+> l'intelligibilité AVANT de nommer. Les formes non tiretées `videoshrink.app`
+> et `videocompress.app` sont prises ; `squeezevid.app` était libre.
 
 ## 2. Le choix du produit (étude du 1/10/2026)
 
@@ -46,8 +50,12 @@ modèle de croissance.
 
 ## 4. Ce qui reste à faire
 
-- [ ] **Domaine custom** : `undercap.app` ou équivalent à acheter, puis mettre
-      à jour `lib/site.ts` + `public/llms.txt`, rebuild, `npm run indexnow`.
+- [ ] **Domaine custom** : `squeezevid.app` acheté le 3/10/2026. Le code pointe
+      déjà dessus (`lib/site.ts`, `public/llms.txt`, `security.txt`). Reste à
+      **rattacher le domaine au projet Vercel** (et renommer le projet
+      `undercap` → `squeezevid`), puis rebuild et `npm run indexnow` — à ne
+      lancer qu'une fois le domaine réellement servi, sinon on soumet des URLs
+      mortes à Bing.
 - [ ] Search Console + Bing Webmaster à inscrire (leçon waveform : Bing/ChatGPT
       d'abord, Google observe les domaines récents).
 - [ ] `npm run indexnow` après chaque déploiement de contenu.

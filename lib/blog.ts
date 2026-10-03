@@ -25,7 +25,7 @@ export const ARTICLES: Article[] = [
       {
         paras: [
           'There is something absurd about the standard way to shrink a video online: your file is too big to upload somewhere, so you… upload it somewhere. A 1.5 GB screen recording crawls up your home connection for ten minutes, waits in a server queue, gets compressed, and comes back down. The compression itself was never the slow part.',
-          'Undercap takes the other path: the video never moves. Your browser reads the file from disk, your computer’s own hardware encoder re-encodes it, and the result lands in your downloads folder. This article is about why that is not just more private but usually much faster, and what made it possible only recently.',
+          'SqueezeVid takes the other path: the video never moves. Your browser reads the file from disk, your computer’s own hardware encoder re-encodes it, and the result lands in your downloads folder. This article is about why that is not just more private but usually much faster, and what made it possible only recently.',
         ],
       },
       {
@@ -39,7 +39,7 @@ export const ARTICLES: Article[] = [
         h2: 'WebCodecs: the browser grew a media engine',
         paras: [
           'For most of the web’s history, browser JavaScript could not touch video frames efficiently; tools that tried shipped ffmpeg compiled to WebAssembly. That works, but it runs the codec in software, single-threaded by default, inside a sandbox with memory limits: often slower than real-time, and prone to falling over on big files.',
-          'WebCodecs, shipped in Chromium in 2021 and in Firefox in 2024, changed the deal: it hands web pages the same hardware video encoders and decoders that native apps use, the dedicated silicon in your CPU or GPU that encodes H.264 without breaking a sweat. Undercap is built on it (via the excellent Mediabunny library). On an ordinary laptop, 1080p commonly encodes at several times real-time.',
+          'WebCodecs, shipped in Chromium in 2021 and in Firefox in 2024, changed the deal: it hands web pages the same hardware video encoders and decoders that native apps use, the dedicated silicon in your CPU or GPU that encodes H.264 without breaking a sweat. SqueezeVid is built on it (via the excellent Mediabunny library). On an ordinary laptop, 1080p commonly encodes at several times real-time.',
           'That is the quiet story here: “in your browser” stopped meaning “a toy version of the real thing”. The browser version now uses the same encoder silicon as desktop software.',
         ],
       },
@@ -63,13 +63,13 @@ export const ARTICLES: Article[] = [
     slug: 'how-to-hit-an-exact-video-file-size',
     title: 'How to compress a video to an exact file size',
     description:
-      'File size is bitrate × duration; everything else is detail. The actual math Undercap runs: budgets, safety margins, the resolution ladder, and the verify-and-retry pass.',
+      'File size is bitrate × duration; everything else is detail. The actual math SqueezeVid runs: budgets, safety margins, the resolution ladder, and the verify-and-retry pass.',
     datePublished: '2026-10-01',
     minutes: 7,
     sections: [
       {
         paras: [
-          'Most video tools offer a quality slider and wish you luck. But upload limits are not qualities; they are numbers. “Under 20 MB” is a spec, and hitting a spec takes arithmetic, not vibes. Here is the arithmetic, exactly as Undercap runs it.',
+          'Most video tools offer a quality slider and wish you luck. But upload limits are not qualities; they are numbers. “Under 20 MB” is a spec, and hitting a spec takes arithmetic, not vibes. Here is the arithmetic, exactly as SqueezeVid runs it.',
         ],
       },
       {
@@ -83,27 +83,27 @@ export const ARTICLES: Article[] = [
         h2: 'Subtract before you spend',
         paras: [
           'The video track does not get the whole budget. The container (MP4 boxes, sample tables) costs real bytes, and the audio track flows at its own rate: a typical 128 kbit/s AAC track eats about 1 MB per minute, which at small targets is serious money.',
-          'So the planner works like an accountant: take the target, hold back ~7% for container overhead and encoder imprecision, subtract the audio (kept as-is when it is cheap, re-encoded at 96 or 64 kbit/s when it is not, with the option to drop it entirely), and hand the video encoder what remains. If what remains is below the floor where H.264 produces anything watchable, Undercap refuses with an honest message instead of delivering sludge.',
+          'So the planner works like an accountant: take the target, hold back ~7% for container overhead and encoder imprecision, subtract the audio (kept as-is when it is cheap, re-encoded at 96 or 64 kbit/s when it is not, with the option to drop it entirely), and hand the video encoder what remains. If what remains is below the floor where H.264 produces anything watchable, SqueezeVid refuses with an honest message instead of delivering sludge.',
         ],
       },
       {
         h2: 'The resolution ladder',
         paras: [
           'Encoders have a thin red line measured in bits per pixel per frame. Give 1080p60 only 500 kbit/s (about 0.004 bits per pixel) and you get smearing and blocking. The fix is counterintuitive but reliable: shrink the picture. The same 500 kbit/s at 540p carries four times the bits per pixel, and a sharp 540p beats a mushy 1080p on every screen.',
-          'Undercap automates the trade with a ladder (2160, 1440, 1080, 720, 540, 480, 360, 240), stepping down until the budget per pixel crosses a sanity threshold (and capping frame rate at 60, or 30 in emergencies). The result panel tells you which rung it chose and why.',
+          'SqueezeVid automates the trade with a ladder (2160, 1440, 1080, 720, 540, 480, 360, 240), stepping down until the budget per pixel crosses a sanity threshold (and capping frame rate at 60, or 30 in emergencies). The result panel tells you which rung it chose and why.',
         ],
       },
       {
         h2: 'Trust, but verify',
         paras: [
-          'Encoders treat a requested bitrate as a strong suggestion, not a contract: real output lands a few percent off in either direction. For a hard limit, “a few percent over” means rejection. So after encoding, Undercap weighs the actual file. Under the limit: done. Over: it re-encodes with the bitrate scaled down by the overshoot, which in practice settles the matter in one retry.',
+          'Encoders treat a requested bitrate as a strong suggestion, not a contract: real output lands a few percent off in either direction. For a hard limit, “a few percent over” means rejection. So after encoding, SqueezeVid weighs the actual file. Under the limit: done. Over: it re-encodes with the bitrate scaled down by the overshoot, which in practice settles the matter in one retry.',
           'That verification step is the difference between “compressed near 20 MB” and a download button that only ever hands you a file that actually fits.',
         ],
       },
       {
         h2: 'One trap: email limits lie',
         paras: [
-          'Gmail says 25 MB, and will reject your 20 MB attachment anyway. Email encodes attachments in base64 (4 characters per 3 bytes, a 33% markup) and the limit applies after encoding. The real ceiling for the file is roughly limit ÷ 1.37. That is why Undercap’s Email preset targets 18 MB, not 25.',
+          'Gmail says 25 MB, and will reject your 20 MB attachment anyway. Email encodes attachments in base64 (4 characters per 3 bytes, a 33% markup) and the limit applies after encoding. The real ceiling for the file is roughly limit ÷ 1.37. That is why SqueezeVid’s Email preset targets 18 MB, not 25.',
         ],
       },
     ],
@@ -139,7 +139,7 @@ export const ARTICLES: Article[] = [
         h2: 'The quiet 10 and 25 MB caps everywhere else',
         paras: [
           'Beyond the famous platforms lies a vast mid-internet of upload forms with small, hard caps: helpdesk tickets, CMS media libraries, job portals, LMS assignment boxes, bug trackers. 10 MB and 25 MB are the recurring numbers, with 8 MB surviving in older webhooks and forum software: Discord’s original limit outliving its origin.',
-          'These forms rarely explain themselves; they just reject the file. The playbook is always the same: find the number, compress to just under it, done. That is literally all Undercap does: pick the number, and it handles the just-under part, locally, with a verified result.',
+          'These forms rarely explain themselves; they just reject the file. The playbook is always the same: find the number, compress to just under it, done. That is literally all SqueezeVid does: pick the number, and it handles the just-under part, locally, with a verified result.',
         ],
       },
       {

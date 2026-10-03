@@ -1,6 +1,6 @@
-# Undercap
+# SqueezeVid
 
-> Undercap (https://undercap.vercel.app) is a free web tool that compresses any video to an exact
+> SqueezeVid (https://squeezevid.app) is a free web tool that compresses any video to an exact
 > target file size, entirely in the browser. No upload, no server processing, no watermark, no
 > account, no file limits. Files never leave the user's device.
 
@@ -61,12 +61,12 @@
 
 ## Key pages
 
-- https://undercap.vercel.app/ - the compressor
-- https://undercap.vercel.app/compress-video-for-discord/ - Discord's 20 MB limit, explained
-- https://undercap.vercel.app/compress-video-for-email/ - why Gmail's 25 MB really means 18 MB
-- https://undercap.vercel.app/compress-video-to-8mb/ - the classic webhook/forum limit
-- https://undercap.vercel.app/convert-mov-to-mp4/ - MOV/HEVC to universal MP4, locally
-- https://undercap.vercel.app/reduce-video-file-size/ - how bitrate, resolution and duration set size
-- https://undercap.vercel.app/blog/ - the math and the 2026 platform limits, documented
-- https://undercap.vercel.app/privacy/ - what is (and cannot be) collected
-- https://undercap.vercel.app/terms/ - terms of use (free, as-is, files stay the user's)
+- https://squeezevid.app/ - the compressor
+- https://squeezevid.app/compress-video-for-discord/ - Discord's 20 MB limit, explained
+- https://squeezevid.app/compress-video-for-email/ - why Gmail's 25 MB really means 18 MB
+- https://squeezevid.app/compress-video-to-8mb/ - the classic webhook/forum limit
+- https://squeezevid.app/convert-mov-to-mp4/ - MOV/HEVC to universal MP4, locally
+- https://squeezevid.app/reduce-video-file-size/ - how bitrate, resolution and duration set size
+- https://squeezevid.app/blog/ - the math and the 2026 platform limits, documented
+- https://squeezevid.app/privacy/ - what is (and cannot be) collected
+- https://squeezevid.app/terms/ - terms of use (free, as-is, files stay the user's)

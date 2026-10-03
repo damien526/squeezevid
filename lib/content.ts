@@ -29,7 +29,7 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: 'discord',
     intro: [
       'Discord’s free upload limit is 20 MB per file (raised from 10 MB in August 2026). Anything bigger gets rejected before it even starts uploading, and unlike images, Discord never compresses video for you.',
-      'Undercap fixes that locally: drop your clip, and it re-encodes to land just under 20 MB using your computer’s own hardware encoder. Nothing is uploaded to any server, there is no queue, no watermark, and no account.',
+      'SqueezeVid fixes that locally: drop your clip, and it re-encodes to land just under 20 MB using your computer’s own hardware encoder. Nothing is uploaded to any server, there is no queue, no watermark, and no account.',
     ],
     sections: [
       {
@@ -42,7 +42,7 @@ export const LANDING_PAGES: LandingPage[] = [
       {
         heading: 'How the clip stays watchable at 20 MB',
         body: [
-          'A size limit is really a bitrate budget: 20 MB spread over a 60-second clip allows about 2.6 Mbit/s, plenty for sharp 1080p. Spread over 10 minutes it’s only ~260 kbit/s, which would turn 1080p into mush. When the budget per pixel gets too thin, Undercap automatically steps the resolution down (1080p → 720p → 540p…) so you get a smaller-but-sharp picture instead of a big blurry one.',
+          'A size limit is really a bitrate budget: 20 MB spread over a 60-second clip allows about 2.6 Mbit/s, plenty for sharp 1080p. Spread over 10 minutes it’s only ~260 kbit/s, which would turn 1080p into mush. When the budget per pixel gets too thin, SqueezeVid automatically steps the resolution down (1080p → 720p → 540p…) so you get a smaller-but-sharp picture instead of a big blurry one.',
           'Game clips with lots of motion are the hardest case. If a long clip comes out rough, trim it to the moment that matters before compressing: duration is the single biggest lever.',
         ],
       },
@@ -54,7 +54,7 @@ export const LANDING_PAGES: LandingPage[] = [
       },
       {
         q: 'Will the compressed video have a watermark?',
-        a: 'No. Undercap adds nothing to your video: no watermark, no outro, no metadata branding. It only re-encodes the picture to fit the size you asked for.',
+        a: 'No. SqueezeVid adds nothing to your video: no watermark, no outro, no metadata branding. It only re-encodes the picture to fit the size you asked for.',
       },
       {
         q: 'Does my clip get uploaded to a server to be compressed?',
@@ -72,7 +72,7 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: 'email',
     intro: [
       'Gmail and most providers advertise a 25 MB limit, then reject your 22 MB video anyway. The catch: attachments are base64-encoded for transport, which inflates them by roughly 33%. The real ceiling for the file itself is about 18 MB on Gmail, and less on many corporate servers.',
-      'Undercap targets that real ceiling. The 18 MB Email preset produces a file that survives encoding overhead and actually arrives, instead of bouncing or silently converting into a Drive link.',
+      'SqueezeVid targets that real ceiling. The 18 MB Email preset produces a file that survives encoding overhead and actually arrives, instead of bouncing or silently converting into a Drive link.',
     ],
     sections: [
       {
@@ -100,7 +100,7 @@ export const LANDING_PAGES: LandingPage[] = [
       },
       {
         q: 'Is the video uploaded anywhere while compressing?',
-        a: 'No. Undercap runs entirely in your browser: the file is read locally, re-encoded locally by your own hardware, and saved back to your downloads. No server ever sees it.',
+        a: 'No. SqueezeVid runs entirely in your browser: the file is read locally, re-encoded locally by your own hardware, and saved back to your downloads. No server ever sees it.',
       },
     ],
   },
@@ -114,13 +114,13 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: '8mb',
     intro: [
       '8 MB was Discord’s original upload limit, and it outlived Discord: countless webhooks, chat bots, forum attachments and embed systems still enforce it today. It’s the lowest common denominator of video sharing.',
-      'Undercap treats 8 MB as a hard budget: it measures your clip’s duration, reserves room for audio and container overhead, and spends every remaining bit on the picture, re-encoding locally, in your browser, with nothing uploaded.',
+      'SqueezeVid treats 8 MB as a hard budget: it measures your clip’s duration, reserves room for audio and container overhead, and spends every remaining bit on the picture, re-encoding locally, in your browser, with nothing uploaded.',
     ],
     sections: [
       {
         heading: 'What fits in 8 MB, honestly',
         body: [
-          '8 MB over 30 seconds is about 2.1 Mbit/s, enough for clean 720p and decent 1080p. Over 3 minutes it drops to ~350 kbit/s, where Undercap will step down to 540p or 480p to keep the image coherent. Over 10 minutes, 8 MB is slideshow territory: expect low resolution, and consider trimming instead.',
+          '8 MB over 30 seconds is about 2.1 Mbit/s, enough for clean 720p and decent 1080p. Over 3 minutes it drops to ~350 kbit/s, where SqueezeVid will step down to 540p or 480p to keep the image coherent. Over 10 minutes, 8 MB is slideshow territory: expect low resolution, and consider trimming instead.',
           'If the audio track matters less than the picture (gameplay with music, screen recordings), the “Remove audio” option hands its entire share of the budget back to the video.',
         ],
       },
@@ -128,11 +128,11 @@ export const LANDING_PAGES: LandingPage[] = [
     faq: [
       {
         q: 'Can any video be compressed to 8 MB?',
-        a: 'Technically almost any, but quality depends entirely on duration. Short clips (under a minute) come out looking good; past several minutes the bitrate budget per frame gets so small that heavy downscaling is unavoidable. Undercap warns you when a target is unrealistically small instead of producing garbage.',
+        a: 'Technically almost any, but quality depends entirely on duration. Short clips (under a minute) come out looking good; past several minutes the bitrate budget per frame gets so small that heavy downscaling is unavoidable. SqueezeVid warns you when a target is unrealistically small instead of producing garbage.',
       },
       {
         q: 'Why is my compressed file slightly under 8 MB rather than exactly 8 MB?',
-        a: 'Undercap aims a few percent below the target on purpose. Encoders don’t hit a requested bitrate exactly, and a file at 8.01 MB would be rejected, so the tool leaves a small safety margin, and automatically re-runs tighter if a pass overshoots.',
+        a: 'SqueezeVid aims a few percent below the target on purpose. Encoders don’t hit a requested bitrate exactly, and a file at 8.01 MB would be rejected, so the tool leaves a small safety margin, and automatically re-runs tighter if a pass overshoots.',
       },
     ],
   },
@@ -146,20 +146,20 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: '10mb',
     intro: [
       '10 MB is the quiet default of the business internet: upload forms, helpdesk tickets, CMS media libraries and plenty of corporate mail servers stop there. It was also Discord’s free limit from 2024 until August 2026, which is why so many tools still talk about it.',
-      'Undercap compresses to a hair under 10 MB in your browser: no upload to a compression server (ironic, when the problem is an upload limit), no watermark, no account.',
+      'SqueezeVid compresses to a hair under 10 MB in your browser: no upload to a compression server (ironic, when the problem is an upload limit), no watermark, no account.',
     ],
     sections: [
       {
         heading: 'Duration decides quality',
         body: [
-          'A size target is a bitrate budget. 10 MB across one minute allows ~1.3 Mbit/s, solid 720p. Across five minutes it’s ~260 kbit/s, where Undercap steps the resolution down to keep the picture clean. The tool does this math before encoding and tells you what it decided, so the result is never a surprise.',
+          'A size target is a bitrate budget. 10 MB across one minute allows ~1.3 Mbit/s, solid 720p. Across five minutes it’s ~260 kbit/s, where SqueezeVid steps the resolution down to keep the picture clean. The tool does this math before encoding and tells you what it decided, so the result is never a surprise.',
         ],
       },
     ],
     faq: [
       {
         q: 'The form I’m using says “max 10 MB”. Will the output really fit?',
-        a: 'Yes: Undercap verifies the final file size after encoding, and if a pass lands over the target it automatically re-encodes tighter. The download button only appears with a file that actually fits.',
+        a: 'Yes: SqueezeVid verifies the final file size after encoding, and if a pass lands over the target it automatically re-encodes tighter. The download button only appears with a file that actually fits.',
       },
       {
         q: 'Does compressing to 10 MB change my video’s format?',
@@ -177,7 +177,7 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: '25mb',
     intro: [
       '25 MB is the advertised ceiling of Gmail messages, a frequent cap on learning platforms, application portals and ticket systems, and Discord’s former Nitro-free limit from the 2023–2024 era.',
-      'Undercap hits the target locally: your machine’s hardware encoder does the work, your file never leaves your device, and the result carries no watermark.',
+      'SqueezeVid hits the target locally: your machine’s hardware encoder does the work, your file never leaves your device, and the result carries no watermark.',
     ],
     sections: [
       {
@@ -191,7 +191,7 @@ export const LANDING_PAGES: LandingPage[] = [
     faq: [
       {
         q: 'Is 25 MB enough for good 1080p quality?',
-        a: 'For clips up to ~2 minutes, yes: the bitrate budget stays above what sharp 1080p H.264 needs. Beyond that, Undercap may step down to 720p, which at these budgets usually looks better than starved 1080p.',
+        a: 'For clips up to ~2 minutes, yes: the bitrate budget stays above what sharp 1080p H.264 needs. Beyond that, SqueezeVid may step down to 720p, which at these budgets usually looks better than starved 1080p.',
       },
       {
         q: 'What happens if my video is already under 25 MB?',
@@ -209,7 +209,7 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: '50mb',
     intro: [
       '50 MB is Discord’s Nitro Basic limit (as of late 2026) and a common ceiling on job-application portals, LMS uploads and document-management systems.',
-      'It’s also a generous budget: Undercap can usually keep full resolution and just rebalance the bitrate, re-encoding locally with your hardware encoder in well under real-time.',
+      'It’s also a generous budget: SqueezeVid can usually keep full resolution and just rebalance the bitrate, re-encoding locally with your hardware encoder in well under real-time.',
     ],
     sections: [
       {
@@ -227,7 +227,7 @@ export const LANDING_PAGES: LandingPage[] = [
       },
       {
         q: 'How long does compressing to 50 MB take?',
-        a: 'Undercap uses your computer’s hardware encoder through WebCodecs, so it typically runs several times faster than real-time; a 5-minute clip generally takes well under a minute on a modern laptop. There is no upload and no queue, which is where cloud tools lose most of their time.',
+        a: 'SqueezeVid uses your computer’s hardware encoder through WebCodecs, so it typically runs several times faster than real-time; a 5-minute clip generally takes well under a minute on a modern laptop. There is no upload and no queue, which is where cloud tools lose most of their time.',
       },
     ],
   },
@@ -241,7 +241,7 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: '100mb',
     intro: [
       '100 MB comfortably clears most upload forms, shared-drive policies and messaging apps, while being a fraction of what cameras and screen recorders actually produce.',
-      'At this budget Undercap almost never needs to downscale: it keeps your resolution and frame rate and simply re-encodes at an efficient bitrate, locally, with no upload step at all.',
+      'At this budget SqueezeVid almost never needs to downscale: it keeps your resolution and frame rate and simply re-encodes at an efficient bitrate, locally, with no upload step at all.',
     ],
     sections: [
       {
@@ -255,11 +255,11 @@ export const LANDING_PAGES: LandingPage[] = [
     faq: [
       {
         q: 'Can I compress a very large file, say 2 GB, in the browser?',
-        a: 'Yes. Undercap streams the file from disk rather than loading it into memory at once, so multi-gigabyte inputs work. Only the compressed output is held in memory, and at a 100 MB target that’s trivial.',
+        a: 'Yes. SqueezeVid streams the file from disk rather than loading it into memory at once, so multi-gigabyte inputs work. Only the compressed output is held in memory, and at a 100 MB target that’s trivial.',
       },
       {
         q: 'Why use this instead of a desktop app like HandBrake?',
-        a: 'HandBrake is excellent, if you want to install software and pick codecs, profiles and rate-control modes yourself. Undercap answers a narrower question: “make this file fit under X” with zero installation and zero settings, using the same hardware encoder a native app would.',
+        a: 'HandBrake is excellent, if you want to install software and pick codecs, profiles and rate-control modes yourself. SqueezeVid answers a narrower question: “make this file fit under X” with zero installation and zero settings, using the same hardware encoder a native app would.',
       },
     ],
   },
@@ -273,7 +273,7 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: null,
     intro: [
       'iPhones record MOV files, often with HEVC video inside, and half the internet refuses to play them: Windows machines without codec packs, older players, many upload forms, most embeds.',
-      'Undercap reads the MOV locally in your browser, decodes it with your machine’s hardware, and writes a standard MP4 with H.264 video and AAC audio, the one combination that plays everywhere. Pick a size target while you’re at it, or a generous one just to convert.',
+      'SqueezeVid reads the MOV locally in your browser, decodes it with your machine’s hardware, and writes a standard MP4 with H.264 video and AAC audio, the one combination that plays everywhere. Pick a size target while you’re at it, or a generous one just to convert.',
     ],
     sections: [
       {
@@ -301,7 +301,7 @@ export const LANDING_PAGES: LandingPage[] = [
       },
       {
         q: 'My MOV is HEVC/H.265. Will it work?',
-        a: 'Yes on virtually all modern machines: browsers delegate HEVC decoding to your hardware, and Macs, iPhones and every recent Windows laptop decode it in silicon. If a particular machine truly cannot decode the codec, Undercap says so plainly instead of failing silently.',
+        a: 'Yes on virtually all modern machines: browsers delegate HEVC decoding to your hardware, and Macs, iPhones and every recent Windows laptop decode it in silicon. If a particular machine truly cannot decode the codec, SqueezeVid says so plainly instead of failing silently.',
       },
     ],
   },
@@ -315,28 +315,28 @@ export const LANDING_PAGES: LandingPage[] = [
     targetId: null,
     intro: [
       'Every video’s size is just bitrate × duration. Reducing it means lowering the bitrate, and doing that well means knowing how low you can go before the picture falls apart, and when to trade resolution instead.',
-      'Undercap does that math for you, backwards: you say what the file must weigh, it works out the best bitrate and resolution that fit, then encodes locally in your browser. No upload, no queue, no watermark, no account.',
+      'SqueezeVid does that math for you, backwards: you say what the file must weigh, it works out the best bitrate and resolution that fit, then encodes locally in your browser. No upload, no queue, no watermark, no account.',
     ],
     sections: [
       {
         heading: 'The three levers',
         body: [
           'Bitrate is the direct lever: halve it, halve the file. H.264 tolerates a surprising amount of squeezing before artifacts show, especially on static content like screen recordings.',
-          'Resolution is the rescue lever: when the bitrate budget per pixel gets too thin, a 720p image encoded properly beats a 1080p image starved of bits. Undercap switches rungs automatically when the budget demands it.',
+          'Resolution is the rescue lever: when the bitrate budget per pixel gets too thin, a 720p image encoded properly beats a 1080p image starved of bits. SqueezeVid switches rungs automatically when the budget demands it.',
           'Duration is the lever nobody wants to hear about: trimming a clip to the part that matters does more than any encoder setting. If a target seems impossible, cut first, compress second.',
         ],
       },
       {
         heading: 'Common targets',
         body: [
-          'Sharing on Discord? The free limit is 20 MB. Emailing? Gmail’s 25 MB really means ~18 MB after encoding overhead. Posting through a form or helpdesk? 10 MB and 25 MB caps are everywhere. Undercap ships presets for each: pick one, or type any number of megabytes.',
+          'Sharing on Discord? The free limit is 20 MB. Emailing? Gmail’s 25 MB really means ~18 MB after encoding overhead. Posting through a form or helpdesk? 10 MB and 25 MB caps are everywhere. SqueezeVid ships presets for each: pick one, or type any number of megabytes.',
         ],
       },
     ],
     faq: [
       {
         q: 'How do I reduce a video’s file size without losing quality?',
-        a: 'Strictly, any re-encode trades some quality, but most videos carry far more bitrate than their content needs, so the loss is often invisible. The key is matching the bitrate to the content and stepping resolution down when the budget is tight, which is exactly the planning Undercap automates.',
+        a: 'Strictly, any re-encode trades some quality, but most videos carry far more bitrate than their content needs, so the loss is often invisible. The key is matching the bitrate to the content and stepping resolution down when the budget is tight, which is exactly the planning SqueezeVid automates.',
       },
       {
         q: 'What’s the best format for small video files?',
