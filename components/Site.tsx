@@ -1,6 +1,15 @@
 import Link from 'next/link';
 import { LANDING_PAGES } from '@/lib/content';
 
+// Sister tools, same maker and same promise: free, no account, nothing leaves
+// the browser. External links, so they use <a> rather than next/link.
+const SISTER_TOOLS = [
+  { href: 'https://www.graphmint.app', label: 'Graphmint: make charts online' },
+  { href: 'https://www.onlinecull.com', label: 'OnlineCull: cull photos in your browser' },
+  { href: 'https://www.papercv.app', label: 'PaperCV: free resume builder' },
+  { href: 'https://www.music-waveform.com', label: 'Waveform: audio visualizer' },
+];
+
 export function SiteHeader() {
   return (
     <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-6">
@@ -26,7 +35,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-line">
       <div className="mx-auto w-full max-w-5xl px-5 py-12">
-        <div className="grid gap-10 sm:grid-cols-3">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-display text-lg">
               SQUEEZE<span className="text-lime">VID</span>
@@ -71,6 +80,18 @@ export function SiteFooter() {
                   Contact
                 </a>
               </li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-muted">More free tools</p>
+            <ul className="mt-3 space-y-2 text-sm text-faint">
+              {SISTER_TOOLS.map((t) => (
+                <li key={t.href}>
+                  <a href={t.href} rel="noopener" className="transition-colors hover:text-fg">
+                    {t.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
