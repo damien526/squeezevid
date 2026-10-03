@@ -50,14 +50,17 @@ modèle de croissance.
 
 ## 4. Ce qui reste à faire
 
-- [ ] **Domaine custom** : `squeezevid.app` acheté le 3/10/2026. Le code pointe
-      déjà dessus (`lib/site.ts`, `public/llms.txt`, `security.txt`). Reste à
-      **rattacher le domaine au projet Vercel** (et renommer le projet
-      `undercap` → `squeezevid`), puis rebuild et `npm run indexnow` — à ne
-      lancer qu'une fois le domaine réellement servi, sinon on soumet des URLs
-      mortes à Bing.
-- [ ] Search Console + Bing Webmaster à inscrire (leçon waveform : Bing/ChatGPT
-      d'abord, Google observe les domaines récents).
+- [x] **Domaine custom** : `squeezevid.app` acheté et rattaché au projet Vercel
+      le 3/10/2026 (DNS Vercel, vérifié). Projet Vercel renommé `undercap` →
+      `squeezevid`, repo GitHub renommé `damien526/squeezevid` (GitHub redirige
+      l'ancienne URL), dossier local `~/development/squeezevid`.
+- [ ] `npm run indexnow` **une fois le domaine réellement servi** (vérifier
+      `https://squeezevid.app/` dans un navigateur d'abord) : sinon on soumet
+      des URLs mortes à Bing.
+- [ ] Search Console + Bing Webmaster à inscrire pour `squeezevid.app` (leçon
+      waveform : Bing/ChatGPT d'abord, Google observe les domaines récents).
+      Les fichiers de vérification dans `public/` sont liés au compte, pas au
+      domaine, mais la propriété doit être réclamée sur le nouveau domaine.
 - [ ] `npm run indexnow` après chaque déploiement de contenu.
 - [ ] Cross-link avec waveform (les deux sont des outils vidéo créateur).
 - [ ] Monétisation future : pro tier (batch, presets sauvegardés, 4K) ou
