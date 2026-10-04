@@ -100,6 +100,59 @@ export default async function LandingPageRoute({ params }: Props) {
             <Tool initialTargetId={page.targetId ?? undefined} />
           </section>
 
+          {page.ladder && page.ladder.length > 0 && (
+            /*
+             * What the target actually produces, duration by duration.
+             *
+             * These figures used to be sentences, and three of them were wrong
+             * in the tool's favour. As a table they are checked row by row
+             * against the real planner in `lib/content-claims.test.ts`, which
+             * is the whole reason they moved out of the prose — see the comment
+             * on `ladder` in `lib/content.ts`.
+             *
+             * The table scrolls inside its own container rather than widening
+             * the page: five rows of three columns is narrow, but a reader at
+             * 320 px should not get a horizontally scrolling document.
+             */
+            <section className="mt-16">
+              <h2 className="font-display text-xl sm:text-2xl">What you get, by clip length</h2>
+              <div className="mt-6 overflow-x-auto">
+                <table className="w-full min-w-[22rem] max-w-2xl border-collapse text-sm">
+                  <caption className="caption-bottom pt-3 text-left text-xs text-faint">
+                    For a 1080p 30 fps source with a 128 kbit/s AAC soundtrack — an ordinary screen
+                    recording or phone export. SqueezeVid reports the resolution it picked for your
+                    actual file before you download.
+                  </caption>
+                  <thead>
+                    <tr className="border-b border-line text-left text-muted">
+                      <th scope="col" className="py-2 pr-4 font-medium">Clip length</th>
+                      <th scope="col" className="py-2 pr-4 font-medium">Resolution</th>
+                      <th scope="col" className="py-2 font-medium">Video bitrate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {page.ladder.map((row) => (
+                      <tr key={row.minutes} className="border-b border-line/60">
+                        <th scope="row" className="py-2 pr-4 font-normal">
+                          {row.minutes === 60 ? '1 hour' : `${row.minutes} min`}
+                        </th>
+                        <td className="py-2 pr-4 tabular-nums text-muted">{row.resolution}</td>
+                        <td className="py-2 tabular-nums text-muted">{row.mbits} Mbit/s</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {page.ceiling && (
+                <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted">
+                  Longest clip this target accepts: about {page.ceiling.withAudio} minutes with
+                  sound, or about {page.ceiling.muted} with the audio removed. Past that SqueezeVid
+                  declines the target and says why, rather than producing a file you would not send.
+                </p>
+              )}
+            </section>
+          )}
+
           {page.sections.map((s) => (
             <section key={s.heading} className="mt-16">
               <h2 className="font-display text-xl sm:text-2xl">{s.heading}</h2>
